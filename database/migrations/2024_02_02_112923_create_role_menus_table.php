@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('role_menus', function (Blueprint $table) {
             $table->id();
+            $table->integer('roleid');
+            $table->integer('submenuid');
             $table->timestamps();
         });
     }

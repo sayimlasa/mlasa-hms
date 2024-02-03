@@ -3,9 +3,9 @@
     Role List
 @endsection
 
- 
+
 @section('content')
-   
+
 
     <div class="row justify-content-center">
         <div class="col-lg-8">
@@ -33,7 +33,7 @@
                                 <th>#</th>
                                 <th>Role name</th>
                                 <th>User count</th>
-                                <th>ddd</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>

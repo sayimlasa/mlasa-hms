@@ -1,18 +1,18 @@
-@extends('layouts.master')
+@extends('home')
 @section('title')
     Create Role
 @endsection
 
-@component('components.datatable')@endcomponent
+
 @section('content')
-    @component('components.breadcrumb')
+
         @slot('li_1')
             Role
         @endslot
         @slot('title')
             create
         @endslot
-    @endcomponent
+
 
     <div class="row justify-content-center">
         <div class="col-lg-12">
@@ -32,7 +32,7 @@
                             <span class="fs-10 text-danger">{{ $error }}</span><br/>
                         @endforeach
                     </div>
-                    <form action="{{route('role.save')}}" method="post" onsubmit="return validateforminputs(this)">
+                    <form action="{{route('roles.store')}}" method="post" onsubmit="return validateforminputs(this)">
                         @csrf
                         <input type="hidden" name="role[id]" value="{{isset($role)?$role->id:''}}">
                         <div class="row mb-3">
@@ -49,7 +49,7 @@
                                     <select id="replicate" class="form-select" onchange="replicaterole()">
                                         <option value="">--replicate from--</option>
                                         @foreach($roles as $r)
-                                            <option {{selected(request('replicateid'),$r->id)}} value="{{$r->id}}">{{$r->name}}</option>
+{{--                                            //<option {{selected(request('replicateid'),$r->id)}} value="{{$r->id}}">{{$r->name}}</option>--}}
                                         @endforeach
                                     </select>
                                 </div>
@@ -140,7 +140,7 @@
         function replicaterole() {
             let replicateid = $('#replicate').val();
             let name = $('#name').val();
-            let url = `{{route('role.create',isset($role)?$role->id:'')}}/?name=${name}&replicateid=${replicateid}`;
+            let url = `{{route('roles.create',isset($role)?$role->id:'')}}/?name=${name}&replicateid=${replicateid}`;
             // console.log(url);
             window.location.replace(url);
         }

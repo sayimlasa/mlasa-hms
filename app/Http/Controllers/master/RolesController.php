@@ -62,10 +62,10 @@ class RolesController extends Controller
 
         $menus = Menu::query()->with(['submenus', 'permissions'])->get();
         $roles = Role::query()->where('id', '!=', 1)->get();
-        return view('admin.roles.create-role', compact('menus', 'roles', 'role'));
+        return view('master.roles.create-role', compact('menus', 'roles', 'role'));
     }
 
-    public function save(Request $request)
+    public function store(Request $request)
     {
         if (!Gate::allows('action', Permission::edit_user) &&
             !Gate::allows('action', Permission::add_user)) {
@@ -83,7 +83,7 @@ class RolesController extends Controller
                 $request->validate([
                     'role.name' => ['required', Rule::unique('roles', 'name')]
                 ]);
-                $rolearray['createdby'] = Auth::id();
+                $rolearray['created_by'] = Auth::id();
                 $role = Role::query()->create($rolearray);
             } else {
                 $request->validate([
@@ -91,7 +91,7 @@ class RolesController extends Controller
                 ]);
                 $role = Role::query()->find($rolearray['id']);
                 if (!$role) throw new \Exception('Role not found!');
-                $rolearray['modifiedby'] = Auth::id();
+                $rolearray['modified_by'] = Auth::id();
                 $role->update($rolearray);
 
                 RoleMenu::query()->where('roleid', $role->id)->delete();
@@ -103,6 +103,7 @@ class RolesController extends Controller
 
             DB::commit();
         } catch (\Exception $e) {
+            throw $e;
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -110,35 +111,5 @@ class RolesController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
