@@ -2,11 +2,7 @@
 @section('title')
     Role List
 @endsection
-
-
 @section('content')
-
-
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card" id="user-list">
@@ -65,7 +61,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <!--end col-->
     </div>

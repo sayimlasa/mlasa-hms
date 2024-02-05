@@ -32,4 +32,8 @@ Route::get('/edit-role/{roleid}', [RolesController::class, 'create'])->name('rol
 Route::post('/roles/post',[RolesController::class,'store'])->name('roles.store');
 Route::delete('/delete-role/{roleid}', [RolesController::class, 'delete'])->name('role.delete');
 //branches
-Route::get('/branch',[BranchController::class,'index'])->name('branches.list');
+Route::get('/branch',[BranchController::class,'index'])->name('branches');
+Route::get('/branch/create/{id?}',[BranchController::class,'create'])->name('branches.create');
+Route::post('/branch/store',[BranchController::class,'store'])->name('branches.store');
+Route::post('/branch/destroy{id}',[BranchController::class,'destroy'])->name('branches.destroy');
+

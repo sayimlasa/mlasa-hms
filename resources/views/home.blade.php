@@ -23,7 +23,7 @@
                                             <li>
                                                 <a class="dropdown-item" href="http://127.0.0.1:8000/roles">Roles</a>
                                             </li>
-                                            <li><a class="dropdown-item" href="{{route('branches.list')}}">Branch</a></li>
+                                            <li><a class="dropdown-item" href="{{route('branches')}}">Branch</a></li>
                                         </ul>
                                     </li>
                                 </ul>
