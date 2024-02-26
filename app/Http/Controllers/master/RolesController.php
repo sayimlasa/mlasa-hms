@@ -110,6 +110,20 @@ class RolesController extends Controller
         return redirect()->route('roles')->with('success', 'Role saved');
     }
 
+    public function destroy(string $id){
+    $role=Role::find($id);
+    //check user exist
+    if(!$role) return back()->with('error','Role not found');
+    else{
+        try{
+            $role->delete();
 
+        }catch(Exception $e){
+            throw $e;
+            return redirect()->back()->with('error',$e->getMessage());
+        }
+        return redirect()->route('roles')->with('success','Role successfully deleted');
+    }
+}
 
 }

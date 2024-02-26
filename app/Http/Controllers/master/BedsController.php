@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Http\Controllers\master;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-class UsersController extends Controller
+
+class BedsController extends Controller
 {
     /**
      * Display a listing of the resource.

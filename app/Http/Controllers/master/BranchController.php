@@ -67,35 +67,20 @@ class BranchController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+     $branch=Branch::find($id);
+     if(!$branch) return back()->with('error','Branch is not found');
+     else{
+        try{
+      $branch->delete();
+        }catch(\Exception $e){
+            throw $e;
+        }
+        return redirect()->route('branches')->with('success','branch successfuly deleted');
+     }
     }
 }

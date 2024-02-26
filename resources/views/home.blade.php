@@ -24,6 +24,16 @@
                                                 <a class="dropdown-item" href="http://127.0.0.1:8000/roles">Roles</a>
                                             </li>
                                             <li><a class="dropdown-item" href="{{route('branches')}}">Branch</a></li>
+                                            <li><a class="dropdown-item" href="{{route('users.list')}}">Location</a></li>
+                                            <li><a class="dropdown-item" href="{{route('users.list')}}">Derpatment</a></li>
+                                            <li><a class="dropdown-item" href="{{route('users.list')}}">DepartmentGroup</a></li>
+                                            <li><a class="dropdown-item" href="http://127.0.0.1:8000/ward">Wards</a></li>
+                                            <li><a class="dropdown-item" href="http://127.0.0.1:8000/wing">Wings</a></li>
+                                            <li><a class="dropdown-item" href="http://127.0.0.1:8000/wing">Rooms</a></li>
+                                            <li><a class="dropdown-item" href="{{route('users.list')}}">Beds</a></li>
+                                            <li><a class="dropdown-item" href="{{route('users.list')}}">Suppliers</a></li>
+                                            <li><a class="dropdown-item" href="{{route('users.list')}}">Brands</a></li>
+                                            <li><a class="dropdown-item" href="{{route('users.list')}}">Manufactures</a></li>
                                         </ul>
                                     </li>
                                 </ul>
