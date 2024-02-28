@@ -4,7 +4,6 @@ namespace App\Http\Controllers\master;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 class RoomsController extends Controller
 {
     /**
@@ -12,7 +11,8 @@ class RoomsController extends Controller
      */
     public function index()
     {
-        //
+        $rooms = Room::list()->get();
+        return view('master.rooms.list-room', compact('rooms'));
     }
 
     /**
@@ -20,7 +20,8 @@ class RoomsController extends Controller
      */
     public function create()
     {
-        //
+        $wards=Ward::all();
+        return view('master.rooms.create-room',compact('wards'));
     }
 
     /**
