@@ -1,34 +1,25 @@
 @extends('home')
-@section('title')
-    Branches List
-@endsection
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card" id="user-list">
-                <div class="card-header border-0">
-                    <div class="d-flex align-items-center">
-                        <h5 class="card-title mb-0 flex-grow-1">Branches</h5>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
                         @if(auth()->user()->isAdmin)
-                            <div class="flex-shrink-0">
-                                <div class="d-flex gap-2 flex-wrap">
-                                    <a href="{{ route('branches.create') }}" class="btn btn-success">
-                                        <i class="ri-add-line align-bottom me-1"></i> Create Branch</a>
-                                </div>
-                            </div>
+                            <h3 class="card-title">Branch List</h3>
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{{route('branch.create')}}">Add Branch</a></li>
+                            </ol>
                         @endif
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id=""
-                               class="table nowrap align-middle table-sm table-hover"
-                               style="width:100%;">
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Branch name</th>
-                                <th>Action</th>
+                                <th>Branch Name</th>
+                                <th class="col-2"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -64,12 +55,14 @@
                             </tbody>
                         </table>
                     </div>
+                    <!-- /.card-body -->
                 </div>
+                <!-- /.card -->
+
+
             </div>
+            <!-- /.col -->
         </div>
-        <!--end col-->
+        <!-- /.row -->
     </div>
-    <!--end row-->
-@endsection
-@section('script')
 @endsection

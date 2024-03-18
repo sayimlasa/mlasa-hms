@@ -13,8 +13,10 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    const GENDER_MALE = 'male';
+    const GENDER_FEMALE = 'female';
 
-    
+    protected $guarded = [];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -38,7 +40,7 @@ class User extends Authenticatable
         return DB::table('users', 'u')
             ->join('roles as r', 'r.id', '=', 'u.roleid')
             ->select(['u.*', 'r.name as rolename'])
-            ->selectRaw("concat(u.fname,' ',u.mname,' ',u.lname) as fullname")
+            ->selectRaw("concat(u.fname,' ',u.lname) as fullname")
             ->selectRaw("TIMESTAMPDIFF (YEAR, u.dob, CURDATE()) as age")
             ->orderBy("fullname");
     }

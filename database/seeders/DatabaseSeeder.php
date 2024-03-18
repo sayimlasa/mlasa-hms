@@ -20,7 +20,10 @@ class DatabaseSeeder extends Seeder
         Role::query()->insert(['name' => 'admin', 'created_by' => 1]);
         //insert user
         User::query()->insert([
-            'name' => 'admin',
+            'fname' => 'admin',
+            'lname' => 'admin',
+            'username' => 'admin',
+            'age'=>'28',
             'email' => 'admin@gmail.com',
             'roleid' => 1,
             'password' => Hash::make('123'),

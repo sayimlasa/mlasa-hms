@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('branch_id')->nullable();
             $table->string('name')->nullable();
+            $table->integer('created_by')->nullable();
+            $table->integer('updated_by')->nullable();
             $table->timestamps();
         });
     }

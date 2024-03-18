@@ -21,7 +21,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id=""
+                        <table id="example2"
                                class="table nowrap align-middle table-sm table-hover"
                                style="width:100%;">
                             <thead>

@@ -9,7 +9,7 @@ class Wing extends Model
 {
     use HasFactory;
     public function wards(){
-        return $this->hasMany(Ward::class,'wing_id','id');
+        return $this->hasMany(Ward::class);
     }
-  
+
 }

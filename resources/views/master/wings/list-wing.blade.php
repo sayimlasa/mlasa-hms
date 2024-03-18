@@ -1,70 +1,73 @@
 @extends('home')
-@section('title')
-    Wing List
-@endsection
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card" id="user-list">
-                <div class="card-header border-0">
-                    <div class="d-flex align-items-center">
-                        <h5 class="card-title mb-0 flex-grow-1">Wings</h5>
-                        @if(auth()->user()->isAdmin)
-                            <div class="flex-shrink-0">
-                                <div class="d-flex gap-2 flex-wrap">
-                                    <a href="{{route('wing.create')}}" class="btn btn-success">
-                                        <i class="ri-add-line align-bottom me-1"></i> Create Wing</a>
-                                </div>
-                            </div>
-                        @endif
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+
+                        <h3 class="card-title">Wing List</h3>
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{route('wing.create')}}" >Add Wing</a></li>
+                            {{--                                class="btn btn-primary" data-toggle="modal" data-target="#modal-default"--}}
+                        </ol>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table id=""
-                               class="table nowrap align-middle table-sm table-hover"
-                               style="width:100%;">
+                    <!-- /.card-header -->
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th>S/N</th>
                                 <th>Wing Name</th>
-                                <th></th>
-                                <th></th>
-                                <th>Action</th>
+                                <th class="col-2"></th>
                             </tr>
                             </thead>
                             <tbody>
                             @php($count=1)
-                            @foreach($wings as $wing)
-                                <tr>
-                                    <td>{{$count++}}</td>
-                                    <td>{{$wing->name}}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        <form action="{{ route('wing.destroy',$wing->id) }}" method="POST">
-
-                                            <a class="btn btn-info" href="{{ route('wing.edit',$wing->id) }}">Show</a>
-
-                                            <a class="btn btn-primary" href="{{ route('wing.edit',$wing->id) }}">Edit</a>
-
-                                            @csrf
-                                            @method('DELETE')
-
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                @foreach($wings as $wing)
+                                    <tr>
+                                        <td>{{$count++}}</td>
+                                        <td>{{$wing->name}}</td>
+                                        <td>
+                                            <div class="btn-group hstack gap-3">
+                                                <button type="button" class="btn btn-success btn-flat">Action</button>
+                                                <button type="button"
+                                                        class="btn btn-success btn-flat dropdown-toggle dropdown-icon"
+                                                        data-toggle="dropdown">
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu" role="menu">
+                                                    <a class="dropdown-item" href="{{route('wing.edit',$wing->id)}}">Edit</a>
+                                                    <form action="{{ route('wing.destroy',$wing->id) }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="dropdown-item"><i
+                                                                class="ri-lock-unlock-line"></i> Delete
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
+                    <!-- /.card-body -->
                 </div>
+                <!-- /.card -->
+
+
             </div>
+            <!-- /.col -->
         </div>
-        <!--end col-->
+        <!-- /.row -->
     </div>
-    <!--end row-->
+    @include('modal.wardcreate')
 @endsection
-@section('script')
-@endsection
+

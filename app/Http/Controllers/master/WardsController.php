@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\master;
+use App\Models\master\Location;
 use App\Models\master\Ward;
 use App\Models\master\Wing;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
-
 class WardsController extends Controller
 {
     /**
@@ -35,31 +36,21 @@ class WardsController extends Controller
         $request->validate([
             'name'=>'required|unique:wards',
             'wing_id'=>'required'
+
         ]);
         $ward=new Ward();
         $ward->name=$request->name;
         $ward->wing_id=$request->wing_id;
+        $ward->created_by=Auth::id();
         $ward->save();
         return redirect()->route('ward.index')->with('wing Successfully saved');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        $ward = Ward::list()->first();
+        $ward = Ward::find($id);
         if(!$ward) return back()->with('error','Ward not found');
-        $wings=Wing::all();
-        return view('master.wards.edit-ward',compact('ward','wings'));
+        return view('master.wards.edit-ward',compact('ward'));
     }
 
     /**
@@ -69,11 +60,10 @@ class WardsController extends Controller
     {
         $request->validate([
             'name' => 'required', Rule::unique('wards', 'name')->ignore('id'),
-            'wing_id'=>'required'
         ]);
         $ward=Ward::find($id);
         $ward->name=$request->name;
-        $ward->wing_id=$request->wing_id;
+        $ward->updated_by=Auth::id();
         $ward->update();
         return redirect()->route('ward.index')->with('ward Successfully saved');
     }
@@ -84,7 +74,7 @@ class WardsController extends Controller
     public function destroy(string $id)
     {
         $ward=Ward::find($id);
-        if(!$ward) return back()->with('error','Ward successfully deleted');
+        if(!$ward) return back()->with('error','Ward not found');
         $ward->delete();
         return redirect()->route('ward.index');
     }
