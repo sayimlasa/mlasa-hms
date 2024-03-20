@@ -17,13 +17,36 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         //insert role
-        Role::query()->insert(['name' => 'admin', 'created_by' => 1]);
+        Role::query()->insert([
+            'name' => 'admin',
+            'created_by' => 1,
+            ]);
+        Role::query()->insert([
+            'name' => 'accountant',
+            'created_by' => 1,
+        ]);
+        Role::query()->insert([
+            'name' => 'doctor',
+            'created_by' => 1,
+
+        ]);
+        Role::query()->insert([
+            'name' => 'phamacist',
+            'created_by' => 1,
+        ]);
+        Role::query()->insert([
+            'name' => 'cashier',
+            'created_by' => 1,
+        ]);
+        Role::query()->insert([
+            'name' => 'laboratorist',
+            'created_by' => 1,
+        ]);
         //insert user
         User::query()->insert([
             'fname' => 'admin',
             'lname' => 'admin',
             'username' => 'admin',
-            'age'=>'28',
             'email' => 'admin@gmail.com',
             'roleid' => 1,
             'password' => Hash::make('123'),
@@ -32,11 +55,11 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call([
             MenuSeed::class,
-            // MachineModalSeeder::class,
-            // ProductDefaultsSeeder::class,
-            // DepartmentSeeder::class,
-            // FormFieldsSeeder::class,
-            // TaxCodeSeeder::class,
+            //MachineModalSeeder::class,
+            //ProductDefaultsSeeder::class,
+            //DepartmentSeeder::class,
+            //FormFieldsSeeder::class,
+            //TaxCodeSeeder::class,
         ]);
     }
 }

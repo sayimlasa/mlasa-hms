@@ -5,48 +5,51 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
+
+                        <h3 class="card-title">Role List</h3>
                         @if(auth()->user()->isAdmin)
-                            <h3 class="card-title">Branch List</h3>
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="{{route('branch.create')}}">Add Branch</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('roles.create')}}">Add Role</a></li>
                             </ol>
                         @endif
                     </div>
                     <!-- /.card-header -->
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
-                            <p>{{ $message.closelog() }}</p>
+                            <p>{{ $message }}</p>
                         </div>
                     @endif
                     <div class="card-body">
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>S/N</th>
-                                <th>Branch Name</th>
+                                <th>#</th>
+                                <th>Role name</th>
+                                <th>User count</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
                             @php($count=1)
-                            @foreach($branches as $branch)
+                            @foreach($roles as $r)
                                 <tr>
                                     <td>{{$count++}}</td>
-                                    <td>{{$branch->name}}</td>
+                                    <td>{{$r->name}}</td>
+                                    <td>{{$r->usercount>0?$r->usercount:''}}</td>
                                     <td>
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-success btn-flat">Action</button>
-                                            <button type="button"
-                                                    class="btn btn-success btn-flat dropdown-toggle dropdown-icon"
-                                                    data-toggle="dropdown">
-                                                <span class="sr-only">Toggle Dropdown</span>
-                                            </button>
-                                            <div class="dropdown-menu" role="menu">
-                                                <a class="dropdown-item" href="{{route('branch.edit',$branch->id)}}"><i class="fa fa-edit"></i></a>
-                                                <a class="dropdown-item" href="#"><i class="fa fa-trash"></i></a>
-                                            </div>
+                                            @if($r->id!=1)
+                                            <div class="hstack gap-3">
+                                                <a class="btn btn-primary btn-sm" href="{{route('role.edit',$r->id)}}"><i class="ri-pencil-line"></i> edit</a>
+                                                @if($r->usercount==0)
+                                                    <form action="{{route('role.delete',$r->id)}}" method="post" class="m-0 p-0"
+                                                          onsubmit="return confirm('Do you want to delete this role?')">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button class="btn btn-danger btn-sm"><i class="ri-delete-bin-3-line"></i> delete</button>
+                                                    </form>
+                                                @endif
+                                            @endif
                                         </div>
-
                                     </td>
                                 </tr>
                             @endforeach

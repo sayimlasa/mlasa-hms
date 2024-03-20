@@ -6,11 +6,12 @@
                 <div class="card">
                     <div class="card-header">
 
-                            <h3 class="card-title">User List</h3>
+                        <h3 class="card-title">Room List</h3>
+                        @if(auth()->user()->isAdmin)
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="{{route('user.create')}}">Add User</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('room.create')}}">Add Room</a></li>
                             </ol>
-
+                        @endif
                     </div>
                     <!-- /.card-header -->
                     @if ($message = Session::get('success'))
@@ -23,29 +24,18 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Username</th>
-                                <th>Full name</th>
-                                <th>Gender</th>
-                                <th>Email</th>
-                                <th>Mobile</th>
-                                <th>Date Birth</th>
-                                <th>Role</th>
-                                <th></th>
+                                <th>Room Name</th>
+                                <th>Ward Name</th>
+                                <th class="col-2"></th>
                             </tr>
                             </thead>
                             <tbody>
                             @php($count=1)
-                            @foreach($users as $u)
+                            @foreach($rooms as $w)
                                 <tr>
                                     <td>{{$count++}}</td>
-                                    <td>{{$u->username}}</td>
-                                    <td>{{$u->fullname}}</td>
-                                    <td>{{$u->gender}}</td>
-                                    <td>{{$u->email}}</td>
-                                    <td>{{$u->mobileno}}</td>
-                                    <td>{{$u->dob}}</td>
-                                    <td>{{$u->rolename}}</td>
-
+                                    <td>{{$w->name}}</td>
+                                    <td>{{$w->ward_name}}</td>
                                     <td>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-success btn-flat">Action</button>
@@ -54,11 +44,14 @@
                                                     data-toggle="dropdown">
                                                 <span class="sr-only">Toggle Dropdown</span>
                                             </button>
+                                            @if(auth()->user()->isAdmin)
                                             <div class="dropdown-menu" role="menu">
-                                                <a class="dropdown-item" href="{{route('user.edit',$u->id)}}"><i class="fa fa-user-edit"></i></a>
+                                                <a class="dropdown-item" href="{{route('room.edit',$w->id)}}"><i class="fa fa-edit"></i></a>
                                                 <a class="dropdown-item" href="#"><i class="fa fa-trash-alt"></i></a>
                                             </div>
+                                            @endif
                                         </div>
+
 
                                     </td>
                                 </tr>

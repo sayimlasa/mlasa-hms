@@ -42,12 +42,12 @@
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
                                                 <div class="dropdown-menu" role="menu">
-                                                    <a class="dropdown-item" href="{{route('wing.edit',$wing->id)}}">Edit</a>
+                                                    <a class="dropdown-item" href="{{route('wing.edit',$wing->id)}}"><i class="fa fa-edit"></i></a>
                                                     <form action="{{ route('wing.destroy',$wing->id) }}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="dropdown-item"><i
-                                                                class="ri-lock-unlock-line"></i> Delete
+                                                                class="ri-lock-unlock-line fa fa-trash-alt"></i>
                                                         </button>
                                                     </form>
                                                 </div>

@@ -1,6 +1,9 @@
 <?php
+
+use App\Http\Controllers\master\BedsController;
 use App\Http\Controllers\master\BranchesController;
 use App\Http\Controllers\master\RolesController;
+use App\Http\Controllers\master\RoomsController;
 use App\Http\Controllers\master\UsersController;
 use App\Http\Controllers\Master\WingsController;
 use App\Http\Controllers\Master\WardsController;
@@ -19,8 +22,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-   // return view('welcome');
-})->middleware('auth');
+   return view('welcome');
+});
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //users
@@ -40,8 +43,21 @@ Route::delete('/delete-role/{roleid}', [RolesController::class, 'destroy'])->nam
 //wings
 Route::resource('wing', WingsController::class);
 Route::resource('ward', WardsController::class);
+//room
+Route::get('/room',[RoomsController::class,'index'])->name('room');
+Route::get('/room/create',[RoomsController::class,'create'])->name('room.create');
+Route::get('/room/edit/{id}',[RoomsController::class,'edit'])->name('room.edit');
+Route::post('/room/save',[RoomsController::class,'store'])->name('room.save');
+Route::post('/delete/room',[RoomsController::class,'destroy'])->name('room.destroy');
 
-//new route
+//bed
+Route::get('/bed',[BedsController::class,'index'])->name('bed');
+Route::get('/bed/create',[BedsController::class,'create'])->name('bed.create');
+Route::get('/bed/edit/{id}',[BedsController::class,'edit'])->name('bed.edit');
+Route::post('/bed/save',[BedsController::class,'store'])->name('bed.save');
+Route::post('/bed/destroy/{id}',[BedsController::class,'destroy'])->name('bed.destroy');
+
+//branch
 Route::get('/branch',[BranchesController::class,'index'])->name('branch.list');
 Route::get('/branch/create',[BranchesController::class,'createbranch'])->name('branch.create');
 Route::get('/branch/edit/{id}',[BranchesController::class,'edit'])->name('branch.edit');

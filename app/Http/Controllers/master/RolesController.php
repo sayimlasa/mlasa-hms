@@ -22,7 +22,7 @@ class RolesController extends Controller
     public function index()
     {
         $roles = Role::list()->get();
-        return view('master.roles.roles-list', compact('roles'));
+        return view('master.roles.role-list', compact('roles'));
     }
 
     public function create($roleid = null)

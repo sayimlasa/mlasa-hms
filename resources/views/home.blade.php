@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Mlasa hms | Dashboard</title>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -140,28 +140,31 @@
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge">15</span>
+                    <i class="far fa-user"></i>
+                    <span class="badge badge-warning navbar-badge"></span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-item dropdown-header">15 Notifications</span>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-rightspan">
                     <div class="dropdown-divider"></div>
+                    <span class="dropdown-item dropdown-header">{{Auth::user()->name}}</span>
                     <a href="#" class="dropdown-item">
-                        <i class="fas fa-envelope mr-2"></i> 4 new messages
-                        <span class="float-right text-muted text-sm">3 mins</span>
+                        <i class="fas fa-envelope mr-2"></i> My profile
+                        <span class="float-right text-muted text-sm"></span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-users mr-2"></i> 8 friend requests
-                        <span class="float-right text-muted text-sm">12 hours</span>
+                    <a href=" " class="dropdown-item">
+                        <i class="fas fa-users mr-2"></i>Change Password
+                        <span class="float-right text-muted text-sm"></span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-file mr-2"></i> 3 new reports
-                        <span class="float-right text-muted text-sm">2 days</span>
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
                     </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                        @method('POST')
+                    </form>
                 </div>
             </li>
             <li class="nav-item">
@@ -227,8 +230,13 @@
                                 Master
                                 <i class="right fas fa-angle-left"></i>
                             </p>
-                        </a>
                         <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('roles')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Role</p>
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="{{route('users.list')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -259,6 +267,18 @@
                                 <a href="{{route('ward.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Ward</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('room')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Room</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('bed')}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Bed</p>
                                 </a>
                             </li>
                         </ul>
