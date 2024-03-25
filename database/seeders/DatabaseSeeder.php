@@ -22,24 +22,28 @@ class DatabaseSeeder extends Seeder
             'created_by' => 1,
             ]);
         Role::query()->insert([
-            'name' => 'accountant',
-            'created_by' => 1,
-        ]);
-        Role::query()->insert([
             'name' => 'doctor',
             'created_by' => 1,
 
         ]);
         Role::query()->insert([
-            'name' => 'phamacist',
+            'name' => 'pharmacist',
             'created_by' => 1,
         ]);
         Role::query()->insert([
-            'name' => 'cashier',
+            'name' => 'nurse',
             'created_by' => 1,
         ]);
         Role::query()->insert([
-            'name' => 'laboratorist',
+            'name' => 'technician',
+            'created_by' => 1,
+        ]);
+        Role::query()->insert([
+            'name' => 'accountant',
+            'created_by' => 1,
+        ]);
+        Role::query()->insert([
+            'name' => 'receptionist',
             'created_by' => 1,
         ]);
         //insert user

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\master\BedsController;
 use App\Http\Controllers\master\BranchesController;
 use App\Http\Controllers\master\RolesController;
@@ -7,6 +9,11 @@ use App\Http\Controllers\master\RoomsController;
 use App\Http\Controllers\master\UsersController;
 use App\Http\Controllers\Master\WingsController;
 use App\Http\Controllers\Master\WardsController;
+use App\Http\Controllers\NurseController;
+use App\Http\Controllers\PharmacyController;
+use App\Http\Controllers\reception\PatientController;
+use App\Http\Controllers\reception\ReceptionController;
+use App\Http\Controllers\TechnicianController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +32,7 @@ Route::get('/', function () {
    return view('welcome');
 });
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin',[AdminController::class,'index'])->name('admin')->middleware('admin');
 //users
 Route::get('/user',[UsersController::class,'index'])->name('users.list');
 Route::get('/create-user',[UsersController::class,'create'])->name('user.create');
@@ -70,5 +77,23 @@ Route::get('/location/create',[App\Http\Controllers\master\LocationController::c
 Route::post('/location/store',[App\Http\Controllers\master\LocationController::class,'store'])->name('location.save');
 Route::get('/location/edit/{id}',[App\Http\Controllers\master\LocationController::class,'edit'])->name('location.edit');
 Route::post('/location/update/{id}',[App\Http\Controllers\master\LocationController::class,'update'])->name('location.update');
-//select
+
+//reception
+Route::get('/receptionist',[ReceptionController::class,'reception'])->name('reception')->middleware('receptionist');
+Route::get('/patient/list',[PatientController::class,'index'])->name('patient');
+Route::get('/create/patient',[PatientController::class,'create'])->name('patient.create');
+Route::get('/patient/edit/{id}',[PatientController::class,'edit'])->name('patient.edit');
+Route::post('/patient/store',[PatientController::class,'store'])->name('patient.save');
+Route::post('/patient/update/{id}',[PatientController::class,'store'])->name('patient.update');
+Route::post('/patient/delete/{id}',[PatientController::class,'destroy'])->name('patient.destroy');
+Route::get('/patients/{patient}',[PatientController::class,'view'])->name('patient.view');
+//doctor
+Route::get('/doctor',[DoctorController::class,'index'])->name('doctor.index')->middleware('doctor');
+//reception
+ Route::get('/pharmacist',[PharmacyController::class,'index'])->name('pharmacist.index')->middleware('pharmacist');
+//Technician
+Route::get('/technician',[TechnicianController::class,'index'])->name('technician.index')->middleware('technician');
+//nurse
+Route::get('/nurse',[NurseController::class,'index'])->name('nurse.index')->middleware('nurse');
+ //select
 Route::get('select2',[App\Http\Controllers\Select2Controller::class,'index'])->name('select2.index');
