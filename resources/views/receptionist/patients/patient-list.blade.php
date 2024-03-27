@@ -1,4 +1,4 @@
-@extends('patients.index')
+@extends('receptionist.index')
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -48,6 +48,7 @@
                                             </button>
                                             <div class="dropdown-menu" role="menu">
                                                 <a class="dropdown-item" href="{{route('patient.edit',$p->id)}}"><i class="fa fa-edit"></i></a>
+                                                <a class="dropdown-item" href="{{route('patient.view',$p->id)}}"><i class="fa fa-eye"></i></a>
                                                 <form action="{{ route('patient.destroy',$p->id) }}" method="post">
                                                     @csrf
                                                     <button class="dropdown-item"><i

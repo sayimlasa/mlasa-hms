@@ -15,7 +15,7 @@ class PatientController extends Controller
     public function index()
     {
         $patients=Patient::all();
-        return view('patients.patient-list',compact('patients'));
+        return view('receptionist.patients.patient-list',compact('patients'));
     }
 
     /**
@@ -23,7 +23,7 @@ class PatientController extends Controller
      */
     public function create()
     {
-        return view('patients.create-patient');
+        return view('receptionist.patients.create-patient');
     }
 
     public function edit(string $id)
@@ -46,7 +46,8 @@ class PatientController extends Controller
             $patientarray['updated_by']=Auth::id();
             $patient->update($patientarray);
         }
-        return redirect()->route('patient.view','patient')->with('success','patient successfully saved');
+
+        return redirect()->route('appointment')->with('success','patient successfully saved');
     }
 
 
@@ -57,8 +58,9 @@ class PatientController extends Controller
         $patient->delete();
         return  redirect()->route('patient')->with('success','Patient successfully deleted');
     }
-    public function view(Patient $patient): \Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function view($id)
     {
-        return view('patients.patient-view',['patient'=>$patient]);
+        $patient=Patient::findorfail($id);
+        return view('receptionist.patients.appointment',compact('patient'));
     }
 }

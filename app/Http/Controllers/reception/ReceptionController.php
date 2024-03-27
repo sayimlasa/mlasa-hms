@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\reception;
 
 use App\Http\Controllers\Controller;
+use App\Models\reception\Patient;
 use Illuminate\Http\Request;
 
 class ReceptionController extends Controller
@@ -12,7 +13,8 @@ class ReceptionController extends Controller
      */
     public function reception()
     {
-        return view('patients.index');
+
+        return view('receptionist.index');
     }
 
     /**

@@ -148,10 +148,10 @@
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item menu-open">
-                        <a href="{{route('reception')}}" class="nav-link active">
+                        <a href="{{route('patient')}}" class="nav-link active">
                             <i class="nav-icon  "></i>
                             <p>
-                                Reception
+                                Patients
                                 <i class="far fa-arrow-alt-circle-down"></i>
                             </p>
                         </a>

@@ -1,4 +1,4 @@
-@extends('patients.index')
+@extends('receptionist.index')
 @section('title')
     Create Patient
 @endsection
@@ -26,51 +26,52 @@
                     </div>
 
                     <form action="{{route('patient.save')}}" method="post" onsubmit="return validateforminputs(this)">
-                        <input type="hidden" name="parent[id]" value="{{isset($patient)?$parent->id:''}}">
+                        <input type="hidden" name="patient[id]" value="{{isset($patient)?$parent->i6:''}}">
                         @csrf
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div>
                                     <label for="name" class="form-label">First Name</label>
                                     <input id="name" type="text" name="patient[first_name]" class="form-control" required placeholder="first name"
                                            value="{{isset($parent)?$parent->first_name:''}}">
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div>
                                     <label for="name" class="form-label">Middle Name</label>
                                     <input id="name" type="text" name="patient[middle_name]" class="form-control" required placeholder="middle name"
                                            value="{{isset($parent)?$parent->middle_name:''}}">
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div>
                                     <label for="name" class="form-label">Last Name</label>
                                     <input id="name" type="text" name="patient[last_name]" class="form-control" required placeholder="last name"
                                            value="{{isset($parent)?$parent->last_name:''}}">
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div>
                                     <label for="name" class="form-label">Date of Birth</label>
                                     <input id="name" type="date" name="patient[dob]" class="form-control" required placeholder="date of birth"
                                            value="{{isset($parent)?$parent->dob:''}}">
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div>
                                     <label for="name" class="form-label">Mobile Number</label>
                                     <input id="name" type="text" name="patient[mobileno]" class="form-control" required placeholder="Enter your mobile"
                                            value="{{isset($parent)?$parent->mobileno:''}}">
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div>
                                     <label for="name" class="form-label">Nationality</label>
                                     <input id="name" type="text" name="patient[nation]" class="form-control" required placeholder="Enter your nation"
                                            value="{{isset($parent)?$parent->nation:''}}">
                                 </div>
                             </div>
+                        </div>
                             <div class="d-flex justify-content-center mt-5 pb-3">
                                 <button class="btn btn-success btn-load btn-lg save-btn" type="submit">
                                 <span class="d-flex align-items-center">

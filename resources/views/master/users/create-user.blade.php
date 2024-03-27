@@ -81,10 +81,10 @@
                         <div class="col-md-4">
                             <div>
                                 <label for="roleid" class="form-label">Role</label>
-                                <select id="roleid" name="user[roleid]" class="form-select form-control" required>
+                                <select id="roleid" name="user[roleid]" class="form-select form-control" required readonly>
                                     <option value="">--select role--</option>
                                     @foreach($roles as $r)
-                                        <option {{isset($user)?$user->roleid:'',$r->id}} value="{{$r->id}}">{{$r->name}}</option>
+                                        <option selected {{isset($user)?$user->roleid:'',$r->id}} value="{{$r->id}}">{{$r->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -96,9 +96,9 @@
                             <label for="gender" class="form-label">Gender</label>
                             <select id="gender" name="user[gender]" class="form-select form-control" required>
                                 <option value="">--select gender--</option>
-                                <option
+                                <option selected="selected"
                                     {{isset($user)?$user->gender:'',\App\Models\User::GENDER_MALE}} value="{{\App\Models\User::GENDER_MALE}}">{{\App\Models\User::GENDER_MALE}}</option>
-                                <option
+                                <option selected="selected"
                                     {{isset($user)?$user->gender:'',\App\Models\User::GENDER_FEMALE}} value="{{\App\Models\User::GENDER_FEMALE}}">{{\App\Models\User::GENDER_FEMALE}}</option>
                             </select>
                         </div>

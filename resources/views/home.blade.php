@@ -282,17 +282,13 @@
                                     <p>Bed</p>
                                 </a>
                             </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item menu-open">
-                        <a href="{{route('reception')}}" class="nav-link active">
-                            <i class="nav-icon  "></i>
-                            <p>
-                                Reception
+                            <li class="nav-item">
+                            <a href="{{route('doctor.type')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                            </p>
-                        </a>
-
+                                <p>Doctor Type</p>
+                            </a>
+                    </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>

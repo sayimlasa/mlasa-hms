@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\master\BedsController;
 use App\Http\Controllers\master\BranchesController;
+use App\Http\Controllers\master\DoctorTypeController;
 use App\Http\Controllers\master\RolesController;
 use App\Http\Controllers\master\RoomsController;
 use App\Http\Controllers\master\UsersController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Master\WingsController;
 use App\Http\Controllers\Master\WardsController;
 use App\Http\Controllers\NurseController;
 use App\Http\Controllers\PharmacyController;
+use App\Http\Controllers\reception\Appointment;
 use App\Http\Controllers\reception\PatientController;
 use App\Http\Controllers\reception\ReceptionController;
 use App\Http\Controllers\TechnicianController;
@@ -86,7 +88,9 @@ Route::get('/patient/edit/{id}',[PatientController::class,'edit'])->name('patien
 Route::post('/patient/store',[PatientController::class,'store'])->name('patient.save');
 Route::post('/patient/update/{id}',[PatientController::class,'store'])->name('patient.update');
 Route::post('/patient/delete/{id}',[PatientController::class,'destroy'])->name('patient.destroy');
-Route::get('/patients/{patient}',[PatientController::class,'view'])->name('patient.view');
+Route::get('/patient/{id}',[PatientController::class,'view'])->name('patient.view');
+Route::get('appoint',[Appointment::class,'index'])->name('appointment');
+Route::post('/consultation',[Appointment::class,'consultation'])->name('radio');
 //doctor
 Route::get('/doctor',[DoctorController::class,'index'])->name('doctor.index')->middleware('doctor');
 //reception
@@ -97,3 +101,10 @@ Route::get('/technician',[TechnicianController::class,'index'])->name('technicia
 Route::get('/nurse',[NurseController::class,'index'])->name('nurse.index')->middleware('nurse');
  //select
 Route::get('select2',[App\Http\Controllers\Select2Controller::class,'index'])->name('select2.index');
+
+//doctor type
+Route::get('/doctortype/',[DoctorTypeController::class,'index'])->name('doctor.type');
+Route::get('/doctortype/create',[DoctorTypeController::class,'create'])->name('doctor.type.create');
+Route::get('/doctortype/edit/{id}',[DoctorTypeController::class,'edit'])->name('doctor.type.edit');
+Route::post('/doctortype/save',[DoctorTypeController::class,'store'])->name('doctor.type.store');
+
