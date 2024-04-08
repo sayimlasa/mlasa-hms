@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\master;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RoomRequest;
 use App\Models\Master\Room;
 use App\Models\Master\Ward;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class RoomsController extends Controller
         $wards = Ward::all();
         return view('master.rooms.create-room',compact('wards','room'));
     }
-    public function store(Request $request)
+    public function store(RoomRequest $request)
     {
         $roomarray = $request->get('room');
         if (empty($roomarray['id'])) {//new

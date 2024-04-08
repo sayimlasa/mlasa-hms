@@ -1,4 +1,4 @@
-@extends('index')
+@extends('receptionist.index')
 @section('content')
     <div class="container-fluid">
         <div class="row">

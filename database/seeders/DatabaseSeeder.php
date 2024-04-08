@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\master\DoctorType;
 use App\Models\master\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -56,6 +57,39 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123'),
             'created_by' => 1
 
+        ]);
+        User::query()->insert([
+            'fname' => 'admin',
+            'lname' => 'admin',
+            'username' => 'admin',
+            'email' => 'doctor@gmail.com',
+            'roleid' => 2,
+            'password' => Hash::make('123'),
+            'created_by' => 1
+
+        ]);
+        User::query()->insert([
+            'fname' => 'receptionist',
+            'lname' => 'receptionist',
+            'username' => 'receptionist',
+            'email' => 'receptionist@gmail.com',
+            'roleid' => 7,
+            'password' => Hash::make('123'),
+            'created_by' => 1
+
+        ]);
+        User::query()->insert([
+            'fname' => 'admin',
+            'lname' => 'admin',
+            'username' => 'admin',
+            'email' => 'technician@gmail.com',
+            'roleid' => 5,
+            'password' => Hash::make('123'),
+            'created_by' => 1
+
+        ]);
+        DoctorType::query()->insert([
+            'name'=>'super specialist'
         ]);
         $this->call([
             MenuSeed::class,

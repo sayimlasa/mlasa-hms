@@ -38,7 +38,7 @@
                             <select id="roomid" name="bed[roomid]" class="form-select form-control" required>
                                 <option value="">--select ward--</option>
                                 @foreach($rooms as $r)
-                                    <option {{isset($bed)?$bed->roomid:'',$r->id}} value="{{$r->id}}">{{$r->name}}</option>
+                                    <option {{selected(isset($bed)?$bed->roomid:'',$r->id)}} value="{{$r->id}}">{{$r->name}}</option>
                                 @endforeach
                             </select>
                         </div>

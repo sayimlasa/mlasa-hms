@@ -38,7 +38,7 @@ class LocationController extends Controller
          $location->created_by=Auth::id();
          $location->branch_id=$request->branch_id;
          $location->save();
-        return redirect()->route('location')->with('success','location succesfully saved');
+        return redirect()->route('location')->with('success','location successfully saved');
     }
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\master;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BedRequest;
 use App\Models\Master\Bed;
 use App\Models\Master\Room;
 use Illuminate\Http\Request;
@@ -34,14 +35,14 @@ class BedsController extends Controller
         return view('master.beds.bed-create',compact('rooms','bed'));
 
     }
-    public function store(Request $request)
+    public function store(BedRequest $request)
     {
         $bedarray = $request->get('bed');
         if (empty($bedarray['id'])) { //new
             $bedarray['created_by'] = Auth::id();
             Bed::query()->create($bedarray);
         } else {//update
-            $bed = Room::query()->find($bedarray['id']);
+            $bed = Bed::query()->find($bedarray['id']);
             if (!$bed) redirect()->back()->with('error', 'Room not found');
             $bedarray['updated_by'] = Auth::id();
             $bed->update($bedarray);

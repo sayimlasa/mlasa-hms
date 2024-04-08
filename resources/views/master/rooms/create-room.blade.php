@@ -8,7 +8,7 @@
                             Edit
                         @else
                             Create
-                        @endif User</h5>
+                        @endif Room</h5>
                 </div>
             </div>
         </div>

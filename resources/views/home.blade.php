@@ -192,7 +192,9 @@
                     <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">admin admin</a>
+                    <a href="#" class="d-block">
+                        {{\Illuminate\Support\Facades\Auth::user()->fname}}
+                    </a>
                 </div>
             </div>
 
@@ -234,7 +236,7 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{route('roles')}}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
+                                    <i class="fa fa-address-book"></i>
                                     <p>Role</p>
                                 </a>
                             </li>

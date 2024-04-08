@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Consultation;
+use App\Models\doctor\Assessment;
+use App\Models\reception\Patient;
+use App\Models\Technician;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -11,39 +15,36 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        //
+        $patient = Consultation::list()->get();
+        return view('receptionist.patients.patient-active', compact('patient'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        $patient = Patient::find($id);
+        return view('doctor.doctor-assesment')->with(['patient' => $patient]);
+    }
+
+    public function save(Request $request)
+    {
+        $request->validate([
+            'disease' => 'required',
+        ]);
+        $patient = new Assessment();
+        $patient->patient_id=$request->patientId;
+        $patient->disease = $request->disease;
+        $patient->description = $request->description;
+        $patient->save();
+        return redirect()->route('doctor.index')->with('success','successfully saved assessment');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function patientfromtechnician()
     {
-        //
+       $patients=Technician::list()->get();
+       return view('doctor.patients-from-technician',compact('patients'));
     }
 
     /**

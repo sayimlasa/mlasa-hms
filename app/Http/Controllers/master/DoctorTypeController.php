@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\master;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DoctorRequest;
 use App\Models\master\DoctorType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ class DoctorTypeController extends Controller
         return view('master.doctortypes.doctortype-create',compact('doctor'));
     }
 
-    public function store(Request $request)
+    public function store(DoctorRequest $request)
     {
         $doctorarray=$request->get('doctor');
         if(empty($doctorarray['id'])){

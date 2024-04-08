@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mlasa hms | Dashboard</title>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Ionicons -->
@@ -31,6 +32,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="{{asset('jquery/jsajax.js')}}"></script>
     <script src="{{ URL::asset('asset/js/jquery-3.6.0.min.js') }}"></script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -54,8 +56,13 @@
                 <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true"
                    aria-expanded="false" class="nav-link dropdown-toggle">Patient</a>
                 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                    <li><a href="{{route('patient.create')}}" class="dropdown-item">Create Patient </a></li>
-                    <li><a href="#" class="dropdown-item">Some other action</a></li>
+                    @if(\Illuminate\Support\Facades\Auth::user()->roleid==7)
+                        <li><a href="{{route('patient.create')}}" class="dropdown-item">Create Patient </a></li>
+                    @endif
+                    <li><a href="{{route('patient.active')}}" class="dropdown-item">Active Patient</a></li>
+                    @if(\Illuminate\Support\Facades\Auth::user()->roleid==2)
+                        <li><a href="{{route('technicianform')}}" class="dropdown-item">Patient From Technician</a></li>
+                    @endif
                 </ul>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
@@ -64,14 +71,10 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Patient Record</a>
             </li>
-
         </ul>
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-            <!-- Navbar Search -->
-            <!-- Messages Dropdown Menu -->
-            <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="far fa-user"></i>
@@ -107,7 +110,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
+                <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
+                   role="button">
                     <i class="fas fa-th-large"></i>
                 </a>
             </li>
@@ -126,14 +130,17 @@
                     <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">admin admin</a>
+                    <a href="#" class="d-block">
+                        {{\Illuminate\Support\Facades\Auth::user()->fname}}
+                    </a>
                 </div>
             </div>
 
             <!-- SidebarSearch Form -->
             <div class="form-inline">
                 <div class="input-group" data-widget="sidebar-search">
-                    <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+                           aria-label="Search">
                     <div class="input-group-append">
                         <button class="btn btn-sidebar">
                             <i class="fas fa-search fa-fw"></i>
@@ -144,19 +151,22 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-                    <li class="nav-item menu-open">
-                        <a href="{{route('patient')}}" class="nav-link active">
-                            <i class="nav-icon  "></i>
-                            <p>
-                                Patients
-                                <i class="far fa-arrow-alt-circle-down"></i>
-                            </p>
-                        </a>
+                    @if(\Illuminate\Support\Facades\Auth::user()->roleid==7)
+                        <li class="nav-item menu-open">
+                            <a href="{{route('patient.active')}}" class="nav-link active">
+                                <i class="nav-icon  "></i>
+                                <p>
+                                    Patients
+                                    <i class="far fa-arrow-alt-circle-down"></i>
+                                </p>
+                            </a>
 
-                    </li>
+                        </li>
+                    @endif
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
@@ -199,7 +209,6 @@
             <b>Version</b> 3.2.0
         </div>
     </footer>
-
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
@@ -209,13 +218,12 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-    $.widget.bridge('uibutton', $.ui.button)
-</script>
+<script>$.widget.bridge('uibutton', $.ui.button)</script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- ChartJS -->
@@ -246,6 +254,11 @@
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
 <script src="{{ URL::asset('asset/js/initusablefunction.js') }}"></script>
 <script>
+    $(document).ready(function () {
+        $('.select2').select2();
+    });
+</script>
+<script>
     $(function () {
         //Initialize Select2 Elements
         $('.select2').select2()
@@ -256,9 +269,9 @@
         })
 
         //Datemask dd/mm/yyyy
-        $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+        $('#datemask').inputmask('dd/mm/yyyy', {'placeholder': 'dd/mm/yyyy'})
         //Datemask2 mm/dd/yyyy
-        $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+        $('#datemask2').inputmask('mm/dd/yyyy', {'placeholder': 'mm/dd/yyyy'})
         //Money Euro
         $('[data-mask]').inputmask()
 
@@ -268,7 +281,7 @@
         });
 
         //Date and time picker
-        $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+        $('#reservationdatetime').datetimepicker({icons: {time: 'far fa-clock'}});
 
         //Date range picker
         $('#reservation').daterangepicker()
@@ -283,16 +296,16 @@
         //Date range as a button
         $('#daterange-btn').daterangepicker(
             {
-                ranges   : {
-                    'Today'       : [moment(), moment()],
-                    'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
                     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                 },
                 startDate: moment().subtract(29, 'days'),
-                endDate  : moment()
+                endDate: moment()
             },
             function (start, end) {
                 $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
@@ -312,11 +325,11 @@
         //color picker with addon
         $('.my-colorpicker2').colorpicker()
 
-        $('.my-colorpicker2').on('colorpickerChange', function(event) {
+        $('.my-colorpicker2').on('colorpickerChange', function (event) {
             $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
         })
 
-        $("input[data-bootstrap-switch]").each(function(){
+        $("input[data-bootstrap-switch]").each(function () {
             $(this).bootstrapSwitch('state', $(this).prop('checked'));
         })
 
@@ -346,17 +359,19 @@
         clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
     })
 
-    myDropzone.on("addedfile", function(file) {
+    myDropzone.on("addedfile", function (file) {
         // Hookup the start button
-        file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file) }
+        file.previewElement.querySelector(".start").onclick = function () {
+            myDropzone.enqueueFile(file)
+        }
     })
 
     // Update the total progress bar
-    myDropzone.on("totaluploadprogress", function(progress) {
+    myDropzone.on("totaluploadprogress", function (progress) {
         document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
     })
 
-    myDropzone.on("sending", function(file) {
+    myDropzone.on("sending", function (file) {
         // Show the total progress bar when upload starts
         document.querySelector("#total-progress").style.opacity = "1"
         // And disable the start button
@@ -364,23 +379,23 @@
     })
 
     // Hide the total progress bar when nothing's uploading anymore
-    myDropzone.on("queuecomplete", function(progress) {
+    myDropzone.on("queuecomplete", function (progress) {
         document.querySelector("#total-progress").style.opacity = "0"
     })
 
     // Setup the buttons for all transfers
     // The "add files" button doesn't need to be setup because the config
     // `clickable` has already been specified.
-    document.querySelector("#actions .start").onclick = function() {
+    document.querySelector("#actions .start").onclick = function () {
         myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
     }
-    document.querySelector("#actions .cancel").onclick = function() {
+    document.querySelector("#actions .cancel").onclick = function () {
         myDropzone.removeAllFiles(true)
     }
     // DropzoneJS Demo Code End
 </script>
 <script>
-    $(function() {
+    $(function () {
         var Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -388,78 +403,78 @@
             timer: 3000
         });
 
-        $('.swalDefaultSuccess').click(function() {
+        $('.swalDefaultSuccess').click(function () {
             Toast.fire({
                 icon: 'success',
                 title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.swalDefaultInfo').click(function() {
+        $('.swalDefaultInfo').click(function () {
             Toast.fire({
                 icon: 'info',
                 title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.swalDefaultError').click(function() {
+        $('.swalDefaultError').click(function () {
             Toast.fire({
                 icon: 'error',
                 title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.swalDefaultWarning').click(function() {
+        $('.swalDefaultWarning').click(function () {
             Toast.fire({
                 icon: 'warning',
                 title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.swalDefaultQuestion').click(function() {
+        $('.swalDefaultQuestion').click(function () {
             Toast.fire({
                 icon: 'question',
                 title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
 
-        $('.toastrDefaultSuccess').click(function() {
+        $('.toastrDefaultSuccess').click(function () {
             toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
         });
-        $('.toastrDefaultInfo').click(function() {
+        $('.toastrDefaultInfo').click(function () {
             toastr.info('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
         });
-        $('.toastrDefaultError').click(function() {
+        $('.toastrDefaultError').click(function () {
             toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
         });
-        $('.toastrDefaultWarning').click(function() {
+        $('.toastrDefaultWarning').click(function () {
             toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
         });
 
-        $('.toastsDefaultDefault').click(function() {
+        $('.toastsDefaultDefault').click(function () {
             $(document).Toasts('create', {
                 title: 'Toast Title',
                 body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.toastsDefaultTopLeft').click(function() {
+        $('.toastsDefaultTopLeft').click(function () {
             $(document).Toasts('create', {
                 title: 'Toast Title',
                 position: 'topLeft',
                 body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.toastsDefaultBottomRight').click(function() {
+        $('.toastsDefaultBottomRight').click(function () {
             $(document).Toasts('create', {
                 title: 'Toast Title',
                 position: 'bottomRight',
                 body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.toastsDefaultBottomLeft').click(function() {
+        $('.toastsDefaultBottomLeft').click(function () {
             $(document).Toasts('create', {
                 title: 'Toast Title',
                 position: 'bottomLeft',
                 body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.toastsDefaultAutohide').click(function() {
+        $('.toastsDefaultAutohide').click(function () {
             $(document).Toasts('create', {
                 title: 'Toast Title',
                 autohide: true,
@@ -467,14 +482,14 @@
                 body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.toastsDefaultNotFixed').click(function() {
+        $('.toastsDefaultNotFixed').click(function () {
             $(document).Toasts('create', {
                 title: 'Toast Title',
                 fixed: false,
                 body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.toastsDefaultFull').click(function() {
+        $('.toastsDefaultFull').click(function () {
             $(document).Toasts('create', {
                 body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
                 title: 'Toast Title',
@@ -482,7 +497,7 @@
                 icon: 'fas fa-envelope fa-lg',
             })
         });
-        $('.toastsDefaultFullImage').click(function() {
+        $('.toastsDefaultFullImage').click(function () {
             $(document).Toasts('create', {
                 body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.',
                 title: 'Toast Title',
@@ -491,7 +506,7 @@
                 imageAlt: 'User Picture',
             })
         });
-        $('.toastsDefaultSuccess').click(function() {
+        $('.toastsDefaultSuccess').click(function () {
             $(document).Toasts('create', {
                 class: 'bg-success',
                 title: 'Toast Title',
@@ -499,7 +514,7 @@
                 body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.toastsDefaultInfo').click(function() {
+        $('.toastsDefaultInfo').click(function () {
             $(document).Toasts('create', {
                 class: 'bg-info',
                 title: 'Toast Title',
@@ -507,7 +522,7 @@
                 body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.toastsDefaultWarning').click(function() {
+        $('.toastsDefaultWarning').click(function () {
             $(document).Toasts('create', {
                 class: 'bg-warning',
                 title: 'Toast Title',
@@ -515,7 +530,7 @@
                 body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.toastsDefaultDanger').click(function() {
+        $('.toastsDefaultDanger').click(function () {
             $(document).Toasts('create', {
                 class: 'bg-danger',
                 title: 'Toast Title',
@@ -523,7 +538,7 @@
                 body: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
             })
         });
-        $('.toastsDefaultMaroon').click(function() {
+        $('.toastsDefaultMaroon').click(function () {
             $(document).Toasts('create', {
                 class: 'bg-maroon',
                 title: 'Toast Title',
@@ -538,7 +553,8 @@
         $('#select2-dropdown').select2();
         $('#select2-dropdown').on('change', function (e) {
             var data = $('#select2-dropdown').select2("val");
-        @this.set('ottPlatform', data);
+        @this.set('ottPlatform', data)
+        ;
         });
     });
 </script>

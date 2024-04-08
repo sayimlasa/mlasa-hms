@@ -35,8 +35,8 @@
                                     <td>{{$p->pmiddlename}}</td>
                                     <td>{{$p->plastname}}</td>
                                     <td>{{$p->pmobileno}}</td>
-                                    <td>{{$p->disease}}</td>
-                                    <td>{{$p->description}}</td>
+                                    <td>{{$p->adisease}}</td>
+                                    <td>{{$p->adescription}}</td>
                                     <td>{{$p->created_at}}</td>
                                     <td>
                                         <div class="btn-group">

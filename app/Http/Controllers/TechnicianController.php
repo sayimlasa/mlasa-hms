@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\doctor\Assessment;
+use App\Models\Technician;
 use Illuminate\Http\Request;
 
 class TechnicianController extends Controller
@@ -11,39 +13,30 @@ class TechnicianController extends Controller
      */
     public function index()
     {
-        //
+        $patients=Assessment::list()->get();
+        return view('technician.tech-list',compact('patients'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $patient=Assessment::list()->where('ass.id',$id)->first();
+        return view('technician.tech-assessment')->with(['patient'=>$patient]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function save(Request $request)
     {
-        //
+        $request->validate([
+            'comment'=>'request',
+            'patient_id'=>'request'
+        ]);
+       $patient=new Technician();
+       $patient->patient_id=$request->ppatientId;
+       $patient->ass_id=$request->disiease;
+       $patient->comment=$request->comment;
+       $patient->save();
+        return redirect()->route('technician.index')->with('success','successfully save comment');
     }
 
     /**

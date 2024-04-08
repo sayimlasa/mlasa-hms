@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\master;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Models\master\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class UsersController extends Controller
         return view('master.users.create-user',compact('roles','user'));
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $userarray = $request->get('user');
         if (empty($userarray['id'])) {//new
